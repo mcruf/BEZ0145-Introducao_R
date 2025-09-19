@@ -18,6 +18,10 @@
 # https://coolors.co/
 
 
+# https://vanderleidebastiani.github.io/tutoriais/Graficos_com_R.html
+
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~
 # Carregando os pacotes
 #~~~~~~~~~~~~~~~~~~~~~~~~
