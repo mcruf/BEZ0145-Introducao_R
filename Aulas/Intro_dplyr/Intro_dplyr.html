@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>INTRODUÇÃO A PROJETOS NO R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marie-Christine Rufener" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# INTRODUÇÃO A PROJETOS NO R
+]
+.subtitle[
+## Manipulação de dados com dplyr
+]
+.author[
+### Marie-Christine Rufener
+]
+.institute[
+### <a href="mailto:macrufener@gmail.com" class="email">macrufener@gmail.com</a>
+]
+
+---
+
+
+
+
+&lt;!--- CSS box customization --&gt;
+&lt;style&gt;
+p.comment {
+background-color: #F9DCC4;
+padding: 10px;
+border: 1px solid black;
+margin: 25px;
+border-radius: 5px;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+## &lt;span style="color: Tomato;"&gt;Conteúdo programático &lt;/span&gt; 
+
+&lt;br&gt;
+
+-  **1. Estrutura de dados** 
+
+-  **2. Operadores**  
+
+-  **3. Manipulação de dados**
+    - Funções base
+    - Dplyr
+
+- **4. Prática no R**
+
+---
+class: inverse, center, middle
+
+# Estrutura de dados
+
+---
+
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Relembrando &lt;/span&gt;
+
+
+O R opera em estrutura de *dados nomeados*
+
+  -   Também conhecido por __objetos__ ou __variáveis__
+    
+  -   Armazenamento &amp; manipulação dos dados (ou resultados de análises)
+    
+--
+
+
+``` r
+# Operador de atribuição (à esquerda)
+obj &lt;- c(1, 2, 3) 
+
+
+# Operador de atribuição (à direita)
+c(1, 2, 3)  -&gt; obj2
+
+
+# Operador de atribuição (igualdade)
+obj3 = c(1, 2, 3)
+```
+
+
+---
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;
+
+Os dados podem ser classificados conforme:
+
+  - Tipo de informação 
+    - Variável numérica, discreta, categórica, ... 
+
+&lt;br&gt;
+
+  - Dimensão da informação
+    - 1D, 2D, 3D, ....
+
+--
+
+&lt;br&gt;
+
+&lt;p class="comment"&gt;
+&lt;b&gt; ATENÇÃO: &lt;/b&gt; 
+
+&lt;br&gt;
+
+A manipulação do dados depende tanto do tipo de informação que está sendo tratado, como da sua dimensão
+
+&lt;/p&gt;
+
+
+---
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Tipos &lt;/span&gt; 
+
+Os dados (i.e., variáveis) podem ser classificados de acordo com a natureza da informação sendo armazenada no objeto
+
+
+
+&lt;table class="table table-striped lightable-classic" style='color: black; width: auto !important; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Variável &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Tipo &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Exemplo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Integer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formada por números inteiros &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1, 300, -60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formada por números com casas decimais &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3.2, 18.5, -0.9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Character &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formada por texto sem categorias e estrutura implícita &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Gato, Dinamarca, CNPq &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Factor &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formada por textos com categorias bem definidas &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Manhã, Tarde, Noite &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formado por valores booleanos &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE, FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Date &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Formadas por valores temporais &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2025, 2025-05-26, 2025-05-26 16:35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Missing &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Não há nenhuma informação atribuída à variável &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA (Not Available) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Tipos &lt;/span&gt; 
+
+
+Pode-se usar a função `class()` para avaliar a natureza do dado:
+
+--
+
+
+``` r
+var1 &lt;- c("Olá")
+class(var1)
+```
+
+```
+## [1] "character"
+```
+
+``` r
+var2 &lt;- pi
+class(var2)
+```
+
+```
+## [1] "numeric"
+```
+
+``` r
+var3 &lt;- TRUE
+class(var3)
+```
+
+```
+## [1] "logical"
+```
+
+---
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Tipos &lt;/span&gt; 
+
+
+Alternativamente, pode-se avaliar se o dado é de uma determinada natureza usando a sintaxe `is.NATUREZA_DO_OBJETO()`:
+    
+
+``` r
+## Var1 é de natureza fator?
+is.factor(var1)
+```
+
+```
+## [1] FALSE
+```
+
+``` r
+## Var2 é de natureza numérica?
+is.numeric(var2)
+```
+
+```
+## [1] TRUE
+```
+
+``` r
+## Var3 é de natureza lógica?
+is.numeric(var3)
+```
+
+```
+## [1] FALSE
+```
+
+---
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Tipos &lt;/span&gt; 
+
+
+De modo similar, é possível alterar a natureza do dado usando funções base conforme:
+
+
+
+--
+.pull-left[
+
+``` r
+## Transformando caractere para fator
+periodo &lt;- c("Manhã", "Tarde", "Noite")
+class(periodo)
+```
+
+```
+## [1] "character"
+```
+
+``` r
+periodo &lt;- as.factor(periodo)
+class(periodo)
+```
+
+```
+## [1] "factor"
+```
+]
+
+
+.pull-right[
+
+**Exemplos**
+
+`as.numeric()`
+`as.integer()`
+`as.charachter()`
+`as.factor()`
+`as.logical()`
+
+]
+
+
+
+---
+
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+
+O dado também pode ser classificado de acordo com sua dimensão
+  - Quando contém apenas 1 elemento (1D): 
+  
+---
+
+
+# Estrutura de dados
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+
+O dado também pode ser classificado de acordo com sua dimensão
+  - Quando contém apenas 1 elemento (1D): 
+
+
+**Variável atômica (scalar)**
+
+    
+
+.pull-left[
+
+&lt;img src="Figuras/scalar.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+``` r
+# Isso tudo é um scalar com
+# apenas 1 elemento
+
+s1 &lt;- 1 #integer
+
+s2 &lt;- "Oi" #character
+
+s3 &lt;- TRUE #logical
+```
+
+]
+
+
+---
+# Estrutura de dados
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+
+O dado também pode ser classificado de acordo com sua dimensão
+  - Quando contém +1 elemento: 
+    - Classificação passa a depender da dimensão e tipo de dado
+      - **Vetor**
+      - **Matriz**
+      - **Array**
+      - **Data frame**
+      - **Lista**
+    
+
+---
+# Estrutura de dados
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+
+### Vetor (1D)
+
+Conjunto de elementos do mesmo tipo (numérico, lógico, caractere etc.)
+
+
+.pull-left[
+
+&lt;img src="Figuras/vetor.png" width="23%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+
+&lt;br&gt;
+
+
+``` r
+# Vetor numérico
+v1 &lt;- c(1, 35, 110)
+
+## Vetor caractere
+v2 &lt;- c("A", "B", "C")
+
+## Vetor lógico
+v3 &lt;- c(TRUE, TRUE, FALSE)
+```
+
+]
+
+---
+# Estrutura de dados
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+
+### Matriz (2D)
+
+Representa dados no formato de tabela com linhas e colunas
+
+.pull-left[
+
+&lt;img src="Figuras/matriz.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+
+
+``` r
+m &lt;- matrix(data = letters[1:6], 
+            nrow = 2,
+            ncol = 3)
+m
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,] "a"  "c"  "e" 
+## [2,] "b"  "d"  "f"
+```
+
+]
+
+---
+# Estrutura de dados
+
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+### Array (+2D)
+Extensão da matriz para **+2D**
+
+
+.pull-left[
+
+&lt;img src="Figuras/array.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+
+``` r
+# Array de 2 matrizes 2x2
+a &lt;- array(1:8, dim = c(2, 2, 2))  
+a
+```
+
+```
+## , , 1
+## 
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]    5    7
+## [2,]    6    8
+```
+]
+
+
+
+---
+# Estrutura de dados
+
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+### Data frame (2D)
+
+Similar a uma matriz, porém as colunas podem pertencer à variáveis de naturezas distintas
+
+    
+.pull-left[
+
+&lt;img src="Figuras/dataframe.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+
+
+``` r
+df &lt;- data.frame(Nome = c("Ana", "Beto"), 
+                 Idade = c(25, 16),
+                 Maioridade = c(TRUE, FALSE))
+
+df
+```
+
+```
+##   Nome Idade Maioridade
+## 1  Ana    25       TRUE
+## 2 Beto    16      FALSE
+```
+
+]
+
+
+---
+# Estrutura de dados
+
+
+## &lt;span style="color: #ee6c4d;"&gt;Classificação dos objetos &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Dimensão &lt;/span&gt; 
+
+### Lista (+2D)
+
+Coleção de dadaos de qualquer tipo de informação e dimensão (inclusive outras listas)
+
+
+.pull-left[
+
+&lt;img src="Figuras/lista.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+
+
+``` r
+l &lt;-  list(rep(1, 10), #vetor
+           factor(c("vermelho", "azul", "verde")), #fator
+           matrix(c(1, 2), c(1, 2))) #matriz
+l
+```
+
+```
+## [[1]]
+##  [1] 1 1 1 1 1 1 1 1 1 1
+## 
+## [[2]]
+## [1] vermelho azul     verde   
+## Levels: azul verde vermelho
+## 
+## [[3]]
+##      [,1] [,2]
+## [1,]    1    2
+```
+
+]
+
+
+---
+
+class: inverse, center, middle
+
+# Operadores
+
+---
+
+# Operadores
+&lt;br&gt;
+
+São símbolos (ou combinações de símbolos) que realizam operações específicas sobre variáveis
+
+--
+
+  - usados para fazer *cálculos*, *comparações*, e diversos tipos de *manipulações* 
+
+
+--
+
+- Podem ser agrupados em __4 tipos__ básicos:
+  - Aritméticos
+  - Relacional
+  - Lógico
+  - Especiais
+
+
+---
+# Operadores
+
+### &lt;span style="color: Tomato;"&gt;Aritmético &lt;/span&gt; 
+
+Usados para fazer operações matemáticas
+
+&lt;br&gt;
+
+
+
+
+&lt;table class="table table-striped lightable-classic" style='color: black; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Descrição &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; + &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Adição &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; - &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Subtração &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; * &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Multiplicação &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; / &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Divisão &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; ^ ou ** &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Potência &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; %% &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Resto da divisão &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; %/% &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Divisão inteira &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+# Operadores
+
+### &lt;span style="color: Tomato;"&gt;Relacional &lt;/span&gt; 
+
+Usados para comparar valores, retornando TRUE ou FALSE
+
+
+&lt;br&gt;
+
+
+
+
+&lt;table class="table table-striped lightable-classic" style='color: black; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Descrição &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; &amp;gt; &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Maior &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; &amp;lt; &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Menor &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; &amp;gt;= &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Maior ou igual &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; &amp;lt;= &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Menor ou igual &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; == &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Igualdade &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; != &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Diferença &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+---
+
+# Operadores
+
+### &lt;span style="color: Tomato;"&gt;Lógico &lt;/span&gt; 
+
+Usados para combinar ou inverter valores lógicos (TRUE/FALSE)
+
+&lt;br&gt;
+
+
+
+
+
+&lt;table class="table table-striped lightable-classic" style='color: black; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Descrição &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; ! &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Negação (Não) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; &amp;amp; &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; E &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; | &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; OU &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Operadores
+
+### &lt;span style="color: Tomato;"&gt;Especiais &lt;/span&gt; 
+
+&lt;br&gt;
+
+
+
+
+&lt;table class="table table-striped lightable-classic" style='color: black; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Descrição &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; %in% &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Testa se um elemento pertence a um vetor &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; : &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Sequência de números inteiros &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; %*% &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Produto matricial &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+---
+
+class: inverse, center, middle
+
+# Manipulação dos dados
+
+---
+
+# Manipulação dos dados
+&lt;br&gt;
+
+Os dados podem ser manipulados por diversos motivos e objetivos:
+  - Correção de erros (ortográficos, numéricos, ...)
+  - Organização
+  - Redução (filtragem ou agrupamento)
+  - Padronização para realziar certas análises
+  - Análise exploratória
+  
+
+--
+
+&lt;br&gt;
+
+Há várias formas de manipular os dados:
+  - Funções base
+  - Funções do pacote `dplyr`
+
+
+
+---
+# Manipulação dos dados
+
+## &lt;span style="color: #ee6c4d;"&gt;O pacote dplyr &lt;/span&gt;
+
+.pull-left[
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="Figuras/dplyr.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+*"É uma gramática de manipulação de dados, fornecendo um conjunto consistente de verbos que ajudam a resolver os desafios mais comuns de manipulação de dados"*
+
+
+]
+
+
+---
+
+
+# Manipulação dos dados
+
+## &lt;span style="color: #ee6c4d;"&gt;O pacote dplyr &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| Funções &lt;/span&gt;
+
+As principais funções usadas para manipular os dados são:
+- `filter()`: filtra linha(s) 
+- `select()`: seleciona coluna(s)
+- `arrange()`: ordena os dados
+- `mutate()`: cria e/ou modifica colunas
+- `group_by()`: agrupa os dados
+- `summarise()`: sumariza os dados
+
+--
+
+------
+
+Funções especiais:
+- `rename()`: renomeia as colunas
+- `distinct()`: remove linhas repetidas
+- `count() / n()`: contabiliza o número de linhas dentro de cada grupo
+- `%&gt;%`: pipe - executa as funções sequencialmente
+
+
+---
+
+class: inverse, center, middle
+
+# &lt;center&gt; Prática no R &lt;/center&gt;
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

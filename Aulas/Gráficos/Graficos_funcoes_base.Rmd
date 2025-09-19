@@ -1,0 +1,356 @@
+---
+title: "INTRODUÇÃO A PROJETOS NO R"
+subtitle: "Visualização dos dados - funções base"
+author: "Marie-Christine Rufener"
+institute: "macrufener@gmail.com"
+#date: "2016/12/12 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, my_theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+library(kableExtra)
+library(dplyr)
+
+```
+
+<!--- CSS box customization -->
+<style>
+p.comment {
+background-color: #F9DCC4;
+padding: 10px;
+border: 1px solid black;
+margin: 25px;
+border-radius: 5px;
+}
+</style>
+
+
+## <span style="color: Tomato;">Conteúdo programático </span> 
+
+<br>
+
+-  **1. Visualização dos dados** 
+
+-  **2. Teoria de cores**  
+
+-  **3. Prática no R**
+
+
+---
+class: inverse, center, middle
+
+# Visualização dos dados
+
+---
+
+# Visualização dos dados
+
+<br>
+
+Um **gráfico** consiste em uma **representação visual dos dados** 
+   
+  - *relações*
+  - *padrões* 
+  - *tendências* 
+
+
+--
+
+<br>
+
+<p class="comment">
+<b> Na essência, o gráfico traduz os numeros brutos em uma figura de fácil interpretação </b> 
+</p>
+
+--
+
+<br>
+
+Resumir informações em gráficos é um **processo essencial dentro da pesquisa científica**
+- Explorar os dados 
+- Comunicar os resultados da pesquisa
+
+---
+
+# Visualização dos dados
+<br>
+
+Os gráficos tem por objetivo:
+
+  - resumir informações complexas
+  - identificar padrões e tendências nos dados
+  - identificar *outliers* ou outros tipos de anomalias
+  - comparar valores entre diferentes categorias
+
+
+--
+
+<br>
+
+<p class="comment">
+<b> Como o cérebro humano processa mais rapidamente informações visuais do que dados brutos, é essencial que os gráficos transmitem de forma mais clara e concisa a mensagem desejada </b> 
+</p>
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Histograma </span> 
+
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+
+hist(iris$Sepal.Width, main="", xlab="Comprimento da sépala (cm)", ylab="Frequência", lwd =2, col = 'cyan4')
+
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para visualizar a distribuição de frequência de uma variável numérica** 
+
+]
+
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Boxplot </span> 
+
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+
+boxplot(iris$Sepal.Width, ylab="Comprimento da sépala (cm)", lwd =2, col = 'cyan4')
+
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para visualizar resumo estatístico e outliers de uma variável numérica** 
+
+]
+
+
+
+
+
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Barra </span> 
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+data(iris)
+
+tmp <- tapply(iris$Petal.Length, iris$Species, mean)
+
+barplot(tmp, 
+        col = c("darkorange", "cyan4", "gray90"),
+        main = "Tamanho médio das sépalas por espécie")
+
+
+```
+
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para comparar diferentes categorias/grupos de uma variável categórica (fator)** 
+
+]
+
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Pizza </span> 
+
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+
+tmp <- tapply(iris$Petal.Length, iris$Species, mean)
+pie(tmp, col=c("darkorange", "cyan4", "gray90"), cex = 1.5)
+
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para mostrar proporções de uma variável categórica (fator)** 
+
+]
+
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Linha </span> 
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+data(AirPassengers)
+
+plot(AirPassengers,
+     main="No. de passageiros aéreos 1949-1960", xlab="Anos", ylab="No. de passageiros", lwd =2, col = 'cyan4')
+
+```
+
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para visualizar tendências de uma variável numérica** 
+
+]
+
+---
+
+# Visualização dos dados
+
+### Tipos de gráficos|  <span style="color: Tomato;">Dispersão </span> 
+
+
+
+
+.pull-left[
+
+<br>
+<br>
+
+```{r echo = F, fig.retina=3}
+
+plot(iris$Petal.Length~iris$Petal.Width,
+     main="Relação entre comprimento e largura da pétala ", xlab="Largura (cm)", ylab="Comprimento (cm)", lwd =2, col = 'cyan4')
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+> **Usado para visualizar a relação entre duas variáveis numéricas** 
+
+]
+
+
+---
+
+# Visualização dos dados
+
+### Funções base
+
+O R possui uma série de funções base que permitem elaborar diferentes gráficos:
+
+  - `plot()`: cria gráficos bidimensionais
+  - `hist()`: cria histogramas
+  - `boxplot()`: cria um boxplot
+  - `barplot()`: cria gráficos de barra
+  - `pie()`: cria gráficos de pizza
+
+
+---
+
+# Visualização dos dados
+
+<br>
+
+O R permite confeccionar uma grande diversidade de gráficos além dos que foram apontados aqui:
+
+
+```{r echo=FALSE, out.width ="60%", fig.align ='center'}
+knitr::include_graphics("Figuras/tipos_de_graficos.png")
+```
+
+
+<br>
+
+- **https://r-graph-gallery.com/**
