@@ -1,0 +1,55 @@
+/* --- Fundo da capa --- */
+.title-slide {
+  background-image: url("Figuras/capa.png");
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* --- Remove margens e paddings globais --- */
+html, body, .reveal, .slides {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  background: none !important;
+  overflow: hidden !important;
+}
+
+
+
+/* --- Título principal --- */
+.title-slide h1 {
+  bottom: 35% !important;     /* controla altura vertical */
+  color: #ffffff !important;
+  font-size: 2em !important;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+  margin: 0 0 0 8em;   /* espaço abaixo do título */
+
+}
+
+/* --- Subtítulo --- */
+.title-slide h2 {
+  bottom: 30% !important;
+  color: #f0b000 !important;
+  font-size: 1.8em !important;
+  margin: 0 0 0 9em;   /* espaço abaixo do título */
+
+}
+
+/* --- E-mail / autor --- */
+.title-slide .email {
+  top: 60% !important;
+  color: #ffffff !important;
+  font-size: 0.7em !important;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+  margin: 0 0 0 35em;  
+
+}
+
+

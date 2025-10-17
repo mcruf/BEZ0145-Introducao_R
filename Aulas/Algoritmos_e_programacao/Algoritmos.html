@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>INTRODUÇÃO A PROJETOS NO R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marie-Christine Rufener" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# INTRODUÇÃO A PROJETOS NO R
+]
+.subtitle[
+## Introdução a algoritmos e programação - parte 01
+]
+.author[
+### Marie-Christine Rufener
+]
+.institute[
+### <a href="mailto:macrufener@gmail.com" class="email">macrufener@gmail.com</a>
+]
+
+---
+
+
+class: inverse, center, middle
+
+# Algoritmos
+
+---
+
+# Algoritmos
+
+&lt;br&gt;
+
+São conjuntos de instruções lógicas e sequenciais para realizar uma tarefa ou resolver um problema
+
+--
+
+
+
+.pull-left[
+
+
+
+&lt;table class=" lightable-paper lightable-classic table" style='color: black; font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto; font-size: 20px; color: black; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption style="font-size: initial !important;"&gt;Algoritmo de troca de pneu&lt;/caption&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Desligar o carro &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Pegar as ferramentas &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Pegar o estepe &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Suspender o carro com o macaco &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Desenroscar os 4 parafusos do pneu furado &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Colocar o estepe &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Enroscar os 4 parafusos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Baixar o carro com o macaco &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Guardar as ferramentas &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+
+.pull-right[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+**Funcionam como uma receita de bolo**
+
+]
+
+---
+
+# Algoritmos
+
+&lt;br&gt;
+
+
+São capazes de realizar tarefas como:
+- Ler, manipular e criar dados
+- Avaliar expressões algébricas, relacionais e lógicas
+- Tomar decisões com base nos resultados das expressões avaliadas
+- Repetir um conjunto de ações de acordo com uma condição
+
+&lt;br&gt;
+
+--
+
+Baseados em algumas premissas básicas:
+- **Finitude:** Deve ter um número limitado de etapas e resolver o problema
+- **Clareza:** As etapas são definidas de forma simples, sem ambiguidade e de forma ordenada 
+- **Efetividade:** Deve sempre solucionar o problema, antecipando possíveis falhas; codificado de forma simples e eficiente
+
+---
+
+# Algoritmos
+
+
+Os algoritmos permeiam diferentes esferas do cotidiano
+
+&lt;br&gt;
+
+&lt;img src="Figuras/exemplos_algoritmos.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Algoritmos
+
+&lt;br&gt;
+
+
+&lt;img src="Figuras/matrix_GIF.gif" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+
+---
+
+# Algoritmos
+
+&lt;br&gt;
+
+.pull-left[
+
+&lt;br&gt;
+
+Os algoritmos são típicamente compostos por três partes:
+
+  1. Entrada de dados (*input*)
+  2. Processamento dos dados
+  3. Saída de dados (*input*)
+
+--------
+
+Podem ser representados por um **fluxograma** - ilustração gráfica de um algoritmo
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+&lt;img src="Figuras/Fluxograma_simbolos.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Algoritmos
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left[
+
+
+&lt;img src="Figuras/Fluxograma_simbolos.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+O fluxograma é composto por uma série de controles que definem a ordem de execução das etapas do algoritmo
+  &gt;  **Controles de fluxo**
+
+-------
+
+Controles de fluxo podem ser divididos em duas categorias:
+- **Condicionantes:** permitem a realização de decisões
+- **Iteradores:** permitem a repetição de determinadas sequências
+
+]
+
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Condicionantes** &lt;/span&gt;
+
+&lt;br&gt;
+
+Permite que o algoritmo execute diferentes etapas baseadas em condições lógicas (TRUE/FALSE)
+  - É o mecanismo que faz o computador tomar decisões dependendo de uma determinada condição
+
+  - Na programação: `if, if-else`
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Condicionantes** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;if&lt;/i&gt;  &lt;/span&gt; 
+
+Segue uma estrutura sequencial (Se...)
+
+.pull-left[
+&lt;img src="Figuras/condicao_if.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+**Exemplo no R**
+
+
+``` r
+NOME &lt;- "Morpheus"
+
+if(is.character(NOME)){
+  print(paste("Oi, eu sou o", NOME))
+}
+```
+
+```
+## [1] "Oi, eu sou o Morpheus"
+```
+
+]
+
+
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Condicionantes** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;if-else&lt;/i&gt;  &lt;/span&gt; 
+
+Segue uma estrutura alternada (Se...então...)
+
+
+.pull-left[
+&lt;img src="Figuras/condicao_ifelse.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+**Exemplo no R**
+
+
+``` r
+IDADE &lt;- 15
+
+if(IDADE &gt; 18){
+  print("Você é de maioridade")
+} else{
+  print("Você é de menoridade")
+}
+```
+
+```
+## [1] "Você é de menoridade"
+```
+
+]
+
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;
+
+&lt;br&gt;
+
+Permitm que o algoritmo execute um mesmo bloco de código várias vezes, de forma automatizada
+- Conhecido como *loops* (*laços*, em português)
+- Na programação: `for, while`
+
+
+--
+
+&lt;br&gt;
+
+Muitas vezes associado aos seguintes comandos auxiliares:
+- `break`: interrompe a execução do loop
+- `next`: pula a iteração atual e continua com a próxima iteração
+
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;for&lt;/i&gt;  &lt;/span&gt; 
+
+&lt;br&gt;
+
+Utilizado para fazer os *loopings*, isto é, repetir uma mesma tarefa para um conjunto de valores diferentes
+- Cada repetição é chamada de **iteração** e o objeto que muda de valor em cada iteração é chamado de **iterador**
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;for&lt;/i&gt;  &lt;/span&gt; 
+
+
+
+.pull-left[
+&lt;br&gt;
+
+&lt;img src="Figuras/iterador_for.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+**Exemplo no R**
+
+
+``` r
+MESES &lt;- month.name
+
+for(i in seq_along(MESES)){
+  print(MESES[i])
+}
+```
+
+```
+## [1] "January"
+## [1] "February"
+## [1] "March"
+## [1] "April"
+## [1] "May"
+## [1] "June"
+## [1] "July"
+## [1] "August"
+## [1] "September"
+## [1] "October"
+## [1] "November"
+## [1] "December"
+```
+
+]
+
+
+---
+
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;while&lt;/i&gt;  &lt;/span&gt; 
+
+Similar ao iterador *for*, porém o *loop* é executado apenas enquanto a condição for verdadeira
+
+.pull-left[
+
+&lt;img src="Figuras/iterador_while.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+``` r
+i &lt;- 1
+
+while (i &lt; 5){
+  print(i)
+  i &lt;-  i + 1
+}
+```
+
+```
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+```
+
+
+]
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;break &amp; next&lt;/i&gt;  &lt;/span&gt; 
+
+
+**Break**
+
+Usado para encerrar imediatamente a execução de um *loop* (for/while)
+- útil quando se atinge uma condição e não há necessidade de continuar iterando pelo resto do loop
+  - Economiza tempo de processamento
+  - Útil para detectar erros no código (*bugs*)
+
+
+--
+
+----
+
+**Next**
+
+Usado para pular a iteração atual de um *loop* e prosseguir diretamente para o início da próxima iteração
+- Útil quando se deseja ignorar uma parte do *loop*  
+  - Economiza tempo de processamento
+
+---
+
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;break &amp; next&lt;/i&gt;  &lt;/span&gt; 
+
+
+
+
+---
+
+# Algoritmos
+
+### &lt;span style="color: #ee6c4d;"&gt;**Iteradores** &lt;/span&gt;&lt;span style="color: #3e5c76;"&gt;| &lt;i&gt;break &amp; next&lt;/i&gt;  &lt;/span&gt; 
+
+.pull-left[
+
+**Break**
+
+``` r
+VALORES &lt;- 1:5
+VALORES
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+``` r
+for (i in VALORES){
+  print(i)
+  if (i == 3){
+    print("Parou no 3")
+    break}}
+```
+
+```
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] "Parou no 3"
+```
+
+
+
+]
+
+--
+
+.pull-right[
+
+**Next**
+
+``` r
+IDADES &lt;- sample(1:80, 5)
+IDADES
+```
+
+```
+## [1] 80 28 14  5 19
+```
+
+``` r
+for(i in IDADES){
+  if(i &lt;= 18){
+    print(paste(i, "é menor de idade"))
+    next }
+  print(paste(i, "é maior de idade")) }
+```
+
+```
+## [1] "80 é maior de idade"
+## [1] "28 é maior de idade"
+## [1] "14 é menor de idade"
+## [1] "5 é menor de idade"
+## [1] "19 é maior de idade"
+```
+
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
