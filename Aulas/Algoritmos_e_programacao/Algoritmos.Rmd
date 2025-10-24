@@ -245,7 +245,7 @@ Segue uma estrutura alternada (Se...então...)
 
 
 .pull-left[
-```{r echo=FALSE, out.width ="55%", fig.align ='center'}
+```{r echo=FALSE, out.width ="65%", fig.align ='center'}
 knitr::include_graphics("Figuras/condicao_ifelse.png")
 ```
 
