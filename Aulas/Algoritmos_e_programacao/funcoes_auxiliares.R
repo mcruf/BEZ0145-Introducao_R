@@ -19,7 +19,7 @@ rm(list = c("pacote", "pacotes"))
 
 
 # Mensagem de aviso
-message("Carregando as funções auxiliares")
+message("Carregando as funções auxiliares...")
 
 
 
