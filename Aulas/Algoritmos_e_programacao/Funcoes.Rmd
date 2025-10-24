@@ -1,0 +1,200 @@
+---
+title: "INTRODUÇÃO A PROJETOS NO R"
+subtitle: "Introdução a algoritmos e programação - parte 02"
+author: "Marie-Christine Rufener"
+institute: "macrufener@gmail.com"
+#date: "2016/12/12 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, my_theme.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+class: inverse, center, middle
+
+# Funções
+
+<!--- CSS box customization -->
+<style>
+p.comment {
+background-color: #F9DCC4;
+padding: 10px;
+border: 1px solid black;
+margin: 25px;
+border-radius: 5px;
+}
+</style>
+
+---
+
+
+# Funções
+
+<br>
+
+São códigos preparados para executar tarefas específicas
+
+Ajudam a organizar, automatizar e evitar repetição de código
+  - Menor susceptibilidade à *bugs*
+  - Otimização computacional
+
+<br>
+
+
+.pull-left[
+
+<center><b><span style="color: Tomato;">Funções internas</b></span></center>
+
+
+<center> Vem pré-carregadas com o R </center>
+
+]
+
+.pull-right[
+
+
+<center><b><span style="color: Tomato;">Funções externas</b></span></center>
+
+
+<center> Elaboradas pelo próprio usuário </center>
+
+]
+
+
+---
+
+# Funções
+
+## <span style="color: Tomato;">Exemplo</span>
+
+
+Imagine um banco de dados que use o valor $-99$ para representar valores faltantes (*missing values*). Queremos substituí-los por `NA`s:
+
+```{r eval=T, echo=F}
+library(kableExtra)
+
+set.seed(2025)
+df <- data.frame(replicate(6, sample(c(1:10, -99), 6, rep = TRUE)))
+names(df) <- paste("Coluna", LETTERS[1:6], sep = "_")
+
+```
+
+<br>
+
+```{r echo=F}
+
+kable(df, format = "html", align=rep('c', 6))  %>%
+  kable_styling("striped", full_width = T) %>%
+  kable_classic() 
+
+```
+
+
+---
+# Funções
+
+## <span style="color: Tomato;">Exemplo</span>
+
+Podemos resolver o problema manualmente conforme:
+
+
+```{r echo=T, eval=FALSE}
+
+df$Coluna_A[df$Coluna_A == -99] <- NA 
+df$Coluna_B[df$Coluna_B == -99] <- NA 
+df$Coluna_C[df$Coluna_C == -99] <- NA 
+df$Coluna_D[df$Coluna_C == -99] <- NA 
+df$Coluna_E[df$Coluna_E == -98] <- NA 
+df$Coluna_F[df$Coluna_F == -99] <- NA 
+
+```
+
+--
+
+<br>
+
+O método de replicar a mesma linha de código várias vezes é, contudo, pouco eficiente e propício a muitos erros
+> **Achem os dois erros no exemplo acima**
+
+---
+
+# Funções
+
+<br>
+
+A programação se baseia fortemente no princípio *Don't Repeat Yourself* (DRY; não se repita)
+
+- propõe que cada funcionalidade em um projeto deve ser representada apenas uma vez
+  - Menos é mais!
+    - Quanto mais simples e enxuto o código for, melhor!
+
+
+--
+
+<br>
+
+No exemplo anterior, podemos criar uma função que realize a conversão de $-99$/NA automaticamente:
+
+.pull-left[
+```{r eval=F}
+
+conversor_NA <- function(x){
+  x[x == -99] <- NA
+  return(x)
+}
+
+
+df$Coluna_A <- coversor_NA(df$Coluna_A)
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+> <span style="color: Tomato;">**Obs.:** A função pode ser otimizada ainda mais!</span>
+
+
+]
+
+---
+
+# Funções
+
+<br>
+
+Estrutura de uma função:
+
+- **Nome da função:** usado para chamar a função (normalmente refere ao que ela faz)
+- **Argumentos:** valores de entrada com as quais a função atuará
+- **Corpo:** conjunto de instruções que define o que a função faz
+- **Retorno:** valor(es) produzido pela função; caso omitido, o R retorna automaticamente o último valor avaliado
+
+
+
+
+-----
+
+<br>
+
+```{r echo=T}
+
+# Função de conversão de temperatura 
+fahrenheit_p_celsius <- function(Temperatura_F = VALOR){
+  
+  Temperatura_C <- (Temperatura_F - 32) * (5/9)
+  
+  return(Temperatura_C)
+
+}
+
+```
+
+

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>INTRODUÇÃO A PROJETOS NO R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marie-Christine Rufener" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# INTRODUÇÃO A PROJETOS NO R
+]
+.subtitle[
+## Introdução a algoritmos e programação - parte 02
+]
+.author[
+### Marie-Christine Rufener
+]
+.institute[
+### <a href="mailto:macrufener@gmail.com" class="email">macrufener@gmail.com</a>
+]
+
+---
+
+
+
+class: inverse, center, middle
+
+# Funções
+
+&lt;!--- CSS box customization --&gt;
+&lt;style&gt;
+p.comment {
+background-color: #F9DCC4;
+padding: 10px;
+border: 1px solid black;
+margin: 25px;
+border-radius: 5px;
+}
+&lt;/style&gt;
+
+---
+
+
+# Funções
+
+&lt;br&gt;
+
+São códigos preparados para executar tarefas específicas
+
+Ajudam a organizar, automatizar e evitar repetição de código
+  - Menor susceptibilidade à *bugs*
+  - Otimização computacional
+
+&lt;br&gt;
+
+
+.pull-left[
+
+&lt;center&gt;&lt;b&gt;&lt;span style="color: Tomato;"&gt;Funções internas&lt;/b&gt;&lt;/span&gt;&lt;/center&gt;
+
+
+&lt;center&gt; Vem pré-carregadas com o R &lt;/center&gt;
+
+]
+
+.pull-right[
+
+
+&lt;center&gt;&lt;b&gt;&lt;span style="color: Tomato;"&gt;Funções externas&lt;/b&gt;&lt;/span&gt;&lt;/center&gt;
+
+
+&lt;center&gt; Elaboradas pelo próprio usuário &lt;/center&gt;
+
+]
+
+
+---
+
+# Funções
+
+## &lt;span style="color: Tomato;"&gt;Exemplo&lt;/span&gt;
+
+
+Imagine um banco de dados que use o valor `\(-99\)` para representar valores faltantes (*missing values*). Queremos substituí-los por `NA`s:
+
+
+
+&lt;br&gt;
+
+&lt;table class="table table-striped lightable-classic" style='color: black; margin-left: auto; margin-right: auto; color: black; font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_A &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_B &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_C &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_D &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_E &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Coluna_F &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -99 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+# Funções
+
+## &lt;span style="color: Tomato;"&gt;Exemplo&lt;/span&gt;
+
+Podemos resolver o problema manualmente conforme:
+
+
+
+``` r
+df$Coluna_A[df$Coluna_A == -99] &lt;- NA 
+df$Coluna_B[df$Coluna_B == -99] &lt;- NA 
+df$Coluna_C[df$Coluna_C == -99] &lt;- NA 
+df$Coluna_D[df$Coluna_C == -99] &lt;- NA 
+df$Coluna_E[df$Coluna_E == -98] &lt;- NA 
+df$Coluna_F[df$Coluna_F == -99] &lt;- NA 
+```
+
+--
+
+&lt;br&gt;
+
+O método de replicar a mesma linha de código várias vezes é, contudo, pouco eficiente e propício a muitos erros
+&gt; **Achem os dois erros no exemplo acima**
+
+---
+
+# Funções
+
+&lt;br&gt;
+
+A programação se baseia fortemente no princípio *Don't Repeat Yourself* (DRY; não se repita)
+
+- propõe que cada funcionalidade em um projeto deve ser representada apenas uma vez
+  - Menos é mais!
+    - Quanto mais simples e enxuto o código for, melhor!
+
+
+--
+
+&lt;br&gt;
+
+No exemplo anterior, podemos criar uma função que realize a conversão de `\(-99\)`/NA automaticamente:
+
+.pull-left[
+
+``` r
+conversor_NA &lt;- function(x){
+  x[x == -99] &lt;- NA
+  return(x)
+}
+
+
+df$Coluna_A &lt;- coversor_NA(df$Coluna_A)
+```
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+&gt; &lt;span style="color: Tomato;"&gt;**Obs.:** A função pode ser otimizada ainda mais!&lt;/span&gt;
+
+
+]
+
+---
+
+# Funções
+
+&lt;br&gt;
+
+Estrutura de uma função:
+
+- **Nome da função:** usado para chamar a função (normalmente refere ao que ela faz)
+- **Argumentos:** valores de entrada com as quais a função atuará
+- **Corpo:** conjunto de instruções que define o que a função faz
+- **Retorno:** valor(es) produzido pela função; caso omitido, o R retorna automaticamente o último valor avaliado
+
+
+
+
+-----
+
+&lt;br&gt;
+
+
+``` r
+# Função de conversão de temperatura 
+fahrenheit_p_celsius &lt;- function(Temperatura_F = VALOR){
+  
+  Temperatura_C &lt;- (Temperatura_F - 32) * (5/9)
+  
+  return(Temperatura_C)
+
+}
+```
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
