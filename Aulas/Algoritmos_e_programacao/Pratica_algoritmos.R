@@ -29,7 +29,7 @@
 ## Ex. 1
 y <- -0.5
 
-if(as.integer(y)){
+if(is.numeric(y)){
   print("Y é um número inteiro") # oops, o que tá errado?
 }
 
@@ -124,6 +124,14 @@ ifelse(temperaturas <= 0, "Frio",
 
 NOTAS <- c(3.5, 9, 6.5, 4, 10, 8.2)
 
+classficacao <-ifelse(NOTAS >= 9, "Excelente",
+       ifelse(NOTAS >= 7 & NOTAS < 9, "Bom",
+              ifelse(NOTAS >= 5 & NOTAS < 7, "Regular", "Insuficiente")))
+
+
+cbind(NOTAS, classficacao)
+
+
 ####################################################################
 #><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
@@ -154,6 +162,13 @@ for(j in 1:10){
 NOMES <- c("Morpheus", "Neo", "Trinity", "Agente Smith") #vetor character
 
 for(nome in NOMES){
+  
+  name <- nome
+  
+  if(name == "Neo"){
+    print("Oi")
+  }
+  
   print(nome)
 }
 
@@ -167,7 +182,8 @@ for(i in c(2, 9, 4, 6)){
 
 ## Ex. 4
 for (ano in 2010:2015){
-  print(paste("Ano:", ano))
+  #print(paste("Ano:", ano))
+  print(ano)
 }
 
 
